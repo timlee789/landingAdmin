@@ -83,7 +83,7 @@ function index({landingdata}) {
     })
     }
   return (
-    <div className='mt-12'>
+    <div className='bg-cyan-200'>
         <form onSubmit={handleAddFormSubmit}>
             <input type="text" name="name" placeholder="Enter name" required='required' onChange={handleAddFormChange}/>
             <input type="text" name="address" placeholder="Enter address" onChange={handleAddFormChange}/>
@@ -96,6 +96,7 @@ function index({landingdata}) {
             
             <button type='submit'> Add </button>
         </form>
+        <div className='bg-cyan-200'>High Class</div>
         <table>
           <thead>
             <tr>

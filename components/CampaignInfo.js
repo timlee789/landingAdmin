@@ -96,18 +96,7 @@ function CampaignInfo({campaigninfo}) {
                     <td> {cam.content}</td>
 
                </tr>
-                   
-                    
-                   
-                    
-               
-                // {
-                // campaignname: cam.campaignname,
-                // period:cam.period,
-                // reach:cam.reach,
-                // visit: cam.visit,
-                // participation: cam.participation,
-                // content: cam.content}
+      
             ))}        
         
         </tbody>
