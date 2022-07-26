@@ -1,7 +1,7 @@
 import React from "react";
 import Link from 'next/link';
 
-const ReadOnlyRow = ({ storeData, handleDeleteClick}) => {
+const ReadOnlyRow = ({ storeData, handleEditClick}) => {
   return (
     <tr>
       <td>{storeData.name}</td>
@@ -19,6 +19,13 @@ const ReadOnlyRow = ({ storeData, handleDeleteClick}) => {
           Campaign
         </button></a>
         </Link>
+
+        <button
+          type="button"
+          onClick={(event) => handleEditClick(event, storeData)}
+        >
+          Edit
+        </button>
         {/* <button  type="button" onClick={() => handleDeleteClick(storeData._id)}>
           Delete
         </button> */}

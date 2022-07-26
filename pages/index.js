@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { MongoClient} from 'mongodb';
 import ReadOnlyRow from '../components/ReadOnlyRow';
+import EditableRow from '../components/EditableRow';
 import axios from 'axios';
 
 function index({landingdata}) {
@@ -17,6 +18,17 @@ function index({landingdata}) {
             img1: "",
             img2: "",         
     });
+    const [editFormData, setEditFormData ] = useState({
+            name: "",
+            address: "",
+            phone: "",
+            city: "",
+            zip: "",
+            state: "",
+            storename: "",
+            img1: "",
+            img2: "", 
+   })
    
     const [editContactId, setEditContactId] = useState(null);
     const handleAddFormChange = (event) => {
@@ -27,7 +39,14 @@ function index({landingdata}) {
         newFormData[fieldName] = fieldValue;
         setAddFormData(newFormData);
     };
-  
+    const handleEditFormChange = (event) => {
+      event.preventDefault();
+      const fieldName = event.target.getAttribute("name");
+      const fieldValue = event.target.value;
+      const newFormData = { ...editFormData};
+      newFormData[fieldName] = fieldValue;
+      setEditFormData(newFormData)
+}
     const handleAddFormSubmit = async (event) => {
         event.preventDefault();
         const newStore = {
@@ -69,8 +88,69 @@ function index({landingdata}) {
         // await axios.post('/api/dataInput', {
         // });
       }
-
- 
+      const handleEditFormSubmit = async(event) => {
+        event.preventDefault();
+        const editedContact = {
+          ame: addFormData.name,
+                address: editFormData.address,
+                phone: editFormData.phone,
+                city: editFormData.city,
+                zip: editFormData.zip,
+                state: editFormData.state,
+                storename: editFormData.storename,
+                img1: editFormData.img1,
+                img2: editFormData.img2,
+        };
+        
+        const newContacts = [...storeData];
+        const index = contacts.findIndex((contact) => contact.id === editContactId);
+        newContacts[index] = editedContact;
+        setStoreData(newContacts);
+        //const res = await axios.put('/api/update', editedContact
+              // id: editContactId,
+              // fullName: editFormData.fullName,
+              // address: editFormData.address,
+              // phoneNumber: editFormData.phoneNumber,
+              // email: editFormData.email,
+        //).then ( function(response) {
+         // console.log(response)
+        //} )
+        const response = fetch('./api/updateArray', {
+          method: 'PUT',
+          body: JSON.stringify({
+            "_id": editContactId,
+            "fullName": editFormData.fullName,
+            "address": editFormData.address,
+            "phoneNumber": editFormData.phoneNumber,
+            "email": editFormData.email,
+          }),
+          headers: {
+            'Content-type': 'application/json'
+          }
+        })
+       
+        //const data = await response.json()
+        setEditContactId(null);
+}
+      const handleEditClick = (event, storeData) => {
+        event.preventDefault();
+        setEditContactId(storeData._id);
+        const formValues = {
+          name: addFormData.name,
+                  address: storeData.address,
+                  phone: storeData.phone,
+                  city: storeData.city,
+                  zip: storeData.zip,
+                  state: storeData.state,
+                  storename: storeData.storename,
+                  img1: storeData.img1,
+                  img2: storeData.img2,
+        };
+        setEditFormData(formValues)
+}
+const handleCancelClick = () => {
+  setEditContactId(null);
+}
     const handleDeleteClick = async (contactId) => {
       console.log(contactId);
     const newStores = [...storeData];
@@ -96,7 +176,7 @@ function index({landingdata}) {
             
             <button type='submit'> Add </button>
         </form>
-        <div className='bg-cyan-200'>High Class</div>
+        <div className='bg-cyan-200 text-cyan-700 font-bold underline'>High Class</div>
         <table>
           <thead>
             <tr>
@@ -113,11 +193,23 @@ function index({landingdata}) {
           </thead>
           <tbody className='mt-4'>
               {storeData.map((dat) => (
-                <ReadOnlyRow 
+                <Fragment>
+                 {editContactId === storeData._id ? (
+                  <EditableRow 
+                      editFormData={editFormData}
+                      handleAddFormChange={handleAddFormChange}
+                      handleCancelClick={handleCancelClick}/>
+                 ) : (
+                  <ReadOnlyRow 
                   storeData = {dat}
                   handleDeleteClick={handleDeleteClick}
+                  handleEditClick={handleEditClick}
                 />
+                 )}
+                
+                  </Fragment>
               ))}
+            
           </tbody>
         </table>
 

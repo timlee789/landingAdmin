@@ -11,9 +11,9 @@ const EditableRow = ({
         <input
           type="text"
           required="required"
-          placeholder={editFormData.fullName}
-          name="fullName"
-          value={editFormData.fullName}
+          placeholder={editFormData.name}
+          name="name"
+          value={editFormData.name}
           onChange={handleEditFormChange}
         ></input>
       </td>
@@ -32,18 +32,58 @@ const EditableRow = ({
           type="text"
           required="required"
           placeholder="Enter a phone number..."
-          name="phoneNumber"
-          value={editFormData.phoneNumber}
+          name="phone"
+          value={editFormData.phone}
           onChange={handleEditFormChange}
         ></input>
       </td>
       <td>
         <input
-          type="email"
+          type="text"
           required="required"
-          placeholder="Enter an email..."
-          name="email"
-          value={editFormData.email}
+          placeholder="Enter an City..."
+          name="city"
+          value={editFormData.city}
+          onChange={handleEditFormChange}
+        ></input>
+        <input
+          type="text"
+          required="required"
+          placeholder="Enter an Zip..."
+          name="zip"
+          value={editFormData.zip}
+          onChange={handleEditFormChange}
+        ></input>
+        <input
+          type="text"
+          required="required"
+          placeholder="Enter an statet..."
+          name="state"
+          value={editFormData.state}
+          onChange={handleEditFormChange}
+        ></input>
+        <input
+          type="text"
+          required="required"
+          placeholder="Enter an URL..."
+          name="storename"
+          value={editFormData.storename}
+          onChange={handleEditFormChange}
+        ></input>
+        <input
+          type="text"
+          required="required"
+          placeholder="Enter an Image1..."
+          name="img1"
+          value={editFormData.img1}
+          onChange={handleEditFormChange}
+        ></input>
+        <input
+          type="text"
+          required="required"
+          placeholder="Enter an Category..."
+          name="img2"
+          value={editFormData.img2}
           onChange={handleEditFormChange}
         ></input>
       </td>
