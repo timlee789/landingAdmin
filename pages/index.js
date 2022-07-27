@@ -6,7 +6,7 @@ import axios from 'axios';
 
 function index({landingdata}) {
   //console.log(landingdata)
-    const [ storeData, setStoreData ] = useState(landingdata)
+    const [ storeDatas, setStoreData ] = useState(landingdata)
     const [addFormData, setAddFormData] = useState({
             name: "",
             address: "",
@@ -30,7 +30,7 @@ function index({landingdata}) {
             img2: "", 
    })
    
-    const [editContactId, setEditContactId] = useState(null);
+    const [editContactId, setEditContactId] = useState('62db1fe8e239edf2e7033fab');
     const handleAddFormChange = (event) => {
         event.preventDefault();
         const fieldName = event.target.getAttribute("name");
@@ -61,7 +61,7 @@ function index({landingdata}) {
                 img2: addFormData.img2,
         };
       
-        const newStores = [...storeData, newStore];
+        const newStores = [...storeDatas, newStore];
         setStoreData(newStores)
         const response = await fetch('/api/dataInput', 
         {
@@ -84,16 +84,14 @@ function index({landingdata}) {
           }
         })
         const data = await response.json();
-        console.log(storeData)
+        console.log(storeDatas)
         // await axios.post('/api/dataInput', {
         // });
       }
       const handleEditFormSubmit = async(event) => {
         event.preventDefault();
         const editedContact = {
-          ame: addFormData.name,
-                address: editFormData.address,
-                phone: editFormData.phone,
+                name: addFormData.name,
                 city: editFormData.city,
                 zip: editFormData.zip,
                 state: editFormData.state,
@@ -102,27 +100,22 @@ function index({landingdata}) {
                 img2: editFormData.img2,
         };
         
-        const newContacts = [...storeData];
-        const index = contacts.findIndex((contact) => contact.id === editContactId);
+        const newContacts = [...storeDatas];
+        const index = storeDatas.findIndex((contact) => contact.id === editContactId);
         newContacts[index] = editedContact;
         setStoreData(newContacts);
-        //const res = await axios.put('/api/update', editedContact
-              // id: editContactId,
-              // fullName: editFormData.fullName,
-              // address: editFormData.address,
-              // phoneNumber: editFormData.phoneNumber,
-              // email: editFormData.email,
-        //).then ( function(response) {
-         // console.log(response)
-        //} )
-        const response = fetch('./api/updateArray', {
+       
+        const response = fetch('./api/updateArraystore', {
           method: 'PUT',
           body: JSON.stringify({
             "_id": editContactId,
-            "fullName": editFormData.fullName,
-            "address": editFormData.address,
-            "phoneNumber": editFormData.phoneNumber,
-            "email": editFormData.email,
+            "name": editFormData.name,
+            "city": editFormData.city,
+            "zip": editFormData.zip,
+            "state": editFormData.state,
+            "storename": editFormData.storename,
+            "img1": editFormData.img1,
+            "img2": editFormData.img2,
           }),
           headers: {
             'Content-type': 'application/json'
@@ -136,7 +129,7 @@ function index({landingdata}) {
         event.preventDefault();
         setEditContactId(storeData._id);
         const formValues = {
-          name: addFormData.name,
+                  name: storeData.name,
                   address: storeData.address,
                   phone: storeData.phone,
                   city: storeData.city,
@@ -148,22 +141,23 @@ function index({landingdata}) {
         };
         setEditFormData(formValues)
 }
-const handleCancelClick = () => {
-  setEditContactId(null);
-}
-    const handleDeleteClick = async (contactId) => {
-      console.log(contactId);
-    const newStores = [...storeData];
-    const index = storeData.findIndex((contact) => contact._id === contactId);
-    newStores.splice(index, 1);
-    setStoreData(newStores);
-    const deleteData = await axios.delete('/api/delete',{params:{_id:contactId}})
-    .then(function (response) {
-    console.log(response)
-    })
-    }
+      const handleCancelClick = () => {
+        setEditContactId(null);
+      }
+          const handleDeleteClick = async (contactId) => {
+            console.log(contactId);
+          const newStores = [...storeDatas];
+          const index = storeDatas.findIndex((contact) => contact._id === contactId);
+          newStores.splice(index, 1);
+          setStoreData(newStores);
+          const deleteData = await axios.delete('/api/delete',{params:{_id:contactId}})
+          .then(function (response) {
+          console.log(response)
+          })
+          }
   return (
-    <div className='bg-cyan-200'>
+    <div className='ml-12'>
+      <div className='text-cyan-700 font-bold underline text-3xl ml-10 my-6'>ADD NEW STORE</div>
         <form onSubmit={handleAddFormSubmit}>
             <input type="text" name="name" placeholder="Enter name" required='required' onChange={handleAddFormChange}/>
             <input type="text" name="address" placeholder="Enter address" onChange={handleAddFormChange}/>
@@ -176,43 +170,43 @@ const handleCancelClick = () => {
             
             <button type='submit'> Add </button>
         </form>
-        <div className='bg-cyan-200 text-cyan-700 font-bold underline'>High Class</div>
+        <div className='text-cyan-700 font-bold underline text-3xl ml-10 my-6'>VIP STORE LIST</div>
+        <form onSubmit={handleEditFormSubmit}>
         <table>
           <thead>
             <tr>
+              <th>Action</th>
               <th>Store Name</th>
-              <th>Phone</th>
-              <th>Store Address</th>
+              {/* <th>Phone</th>
+              <th>Store Address</th> */}
               <th>City</th>
               <th>State</th> 
               <th>Zip Code</th> 
               <th>Store URL</th>
               <th>Image1</th>
+              <th>Category</th>
              
             </tr>
           </thead>
-          <tbody className='mt-4'>
-              {storeData.map((dat) => (
+          <tbody className='mt-10'>       
+              {storeDatas.map((contact) => (
                 <Fragment>
-                 {editContactId === storeData._id ? (
-                  <EditableRow 
-                      editFormData={editFormData}
-                      handleAddFormChange={handleAddFormChange}
-                      handleCancelClick={handleCancelClick}/>
-                 ) : (
-                  <ReadOnlyRow 
-                  storeData = {dat}
-                  handleDeleteClick={handleDeleteClick}
-                  handleEditClick={handleEditClick}
-                />
-                 )}
-                
-                  </Fragment>
-              ))}
-            
+                 {editContactId === contact._id ? (
+                    <EditableRow 
+                    editFormData={editFormData}
+                    handleEditFormChange={handleEditFormChange}
+                    handleCancelClick={handleCancelClick}/>
+                 ): (
+                    <ReadOnlyRow 
+                    storeData = {contact}
+                    handleDeleteClick={handleDeleteClick}
+                    handleEditClick={handleEditClick} />
+                 )}     
+                </Fragment>
+              ))}           
           </tbody>
         </table>
-
+        </form>
     </div>
   )
 }
@@ -229,7 +223,7 @@ client.close();
   return {
     props: {
       landingdata: myData.map(Data => ({
-        id: Data._id.toString() ,
+        _id: Data._id.toString() ,
         name: Data.name || null,
         phone: Data.phone || null,
         address: Data.address || null,
@@ -238,6 +232,7 @@ client.close();
         state: Data.state || null,
         storename: Data.storename || null,
         img1: Data.img1, 
+        img2: Data.img2 || null,
   }))
      
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import {MongoClient, ObjectId} from 'mongodb'
-import CampaignInfo from "../../components/CampaignInfo";
+import StoreInfo from '../../components/StoreInfo';
 
 export async function getStaticPaths(){
         const client = await MongoClient.connect(
@@ -10,12 +10,6 @@ export async function getStaticPaths(){
         const myCollection = db.collection('usavipstores');
         const store = await myCollection.find({}, {_id: 1}).toArray(); 
         client.close();
-                // const res = await axios.get('http://localhost:3000/api/store');
-                // const posts = await res.json();
-                // console.log(posts);
-                // const  paths = users.map((store) => ({
-                //         params: {storename: store.storename.toString()},
-                // }))
                 return {
                  paths : store.map((data) => ({
                         params: {id: data._id.toString()}})),
@@ -60,7 +54,7 @@ export default function Campaign({storeinfo}){
      
     return(
             <div>     
-                <CampaignInfo campaigninfo={storeinfo} />        
+                <StoreInfo campaigninfo={storeinfo} />        
             </div>
     )
 

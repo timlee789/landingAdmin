@@ -7,27 +7,24 @@ const EditableRow = ({
 }) => {
   return (
     <tr>
+        <td>
+       
+        <button type="button" onClick={handleCancelClick}  className=" mr-5 px-4 bg-blue-400 text-white text-center">
+          Cancel
+        </button>
+        <button type="submit"  className=" mr-10 px-4 bg-gray-500 text-white text-center">EDIT SAVE</button>
+      </td>
       <td>
         <input
           type="text"
           required="required"
-          placeholder={editFormData.name}
+          placeholder="Enter Store Name"
           name="name"
           value={editFormData.name}
           onChange={handleEditFormChange}
         ></input>
       </td>
-      <td>
-        <input
-          type="text"
-          required="required"
-          placeholder="Enter an address..."
-          name="address"
-          value={editFormData.address}
-          onChange={handleEditFormChange}
-        ></input>
-      </td>
-      <td>
+      {/* <td>
         <input
           type="text"
           required="required"
@@ -41,19 +38,23 @@ const EditableRow = ({
         <input
           type="text"
           required="required"
+          placeholder="Enter an address..."
+          name="address"
+          value={editFormData.address}
+          onChange={handleEditFormChange}
+        ></input>
+      </td> */}
+      <td>
+        <input
+          type="text"
+          required="required"
           placeholder="Enter an City..."
           name="city"
           value={editFormData.city}
           onChange={handleEditFormChange}
         ></input>
-        <input
-          type="text"
-          required="required"
-          placeholder="Enter an Zip..."
-          name="zip"
-          value={editFormData.zip}
-          onChange={handleEditFormChange}
-        ></input>
+        </td>
+        <td>
         <input
           type="text"
           required="required"
@@ -62,6 +63,18 @@ const EditableRow = ({
           value={editFormData.state}
           onChange={handleEditFormChange}
         ></input>
+        </td>
+        <td>
+        <input
+          type="text"
+          required="required"
+          placeholder="Enter an Zip..."
+          name="zip"
+          value={editFormData.zip}
+          onChange={handleEditFormChange}
+        ></input>
+        </td>
+        <td>
         <input
           type="text"
           required="required"
@@ -70,6 +83,8 @@ const EditableRow = ({
           value={editFormData.storename}
           onChange={handleEditFormChange}
         ></input>
+        </td>
+        <td>
         <input
           type="text"
           required="required"
@@ -78,6 +93,8 @@ const EditableRow = ({
           value={editFormData.img1}
           onChange={handleEditFormChange}
         ></input>
+        </td>
+        <td>
         <input
           type="text"
           required="required"
@@ -87,12 +104,7 @@ const EditableRow = ({
           onChange={handleEditFormChange}
         ></input>
       </td>
-      <td>
-        <button type="submit">Save</button>
-        <button type="button" onClick={handleCancelClick}>
-          Cancel
-        </button>
-      </td>
+    
     </tr>
   );
 };
