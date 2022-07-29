@@ -24,15 +24,13 @@ const ReadOnlyRow = ({ storeData, handleEditClick}) => {
                    </button> */}
                  </td>
       <td >{storeData.name}</td>
+      <td className="pl-5">{storeData.img2}</td>  
       <td>{storeData.city}</td>
       <td>{storeData.state}</td>
       <td>{storeData.zip}</td>
       <td>{storeData.storename}</td>
-      <td>{storeData.img1}</td>   
-      <td>{storeData.img2}</td>   
-     
+      <td>{storeData.img1}</td>       
     </tr>
-    
   );
 };
 

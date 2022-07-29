@@ -30,7 +30,7 @@ function index({landingdata}) {
             img2: "", 
    })
    
-    const [editContactId, setEditContactId] = useState('62db1fe8e239edf2e7033fab');
+    const [editContactId, setEditContactId] = useState(null);
     const handleAddFormChange = (event) => {
         event.preventDefault();
         const fieldName = event.target.getAttribute("name");
@@ -84,7 +84,7 @@ function index({landingdata}) {
           }
         })
         const data = await response.json();
-        console.log(storeDatas)
+        setAddFormData("")
         // await axios.post('/api/dataInput', {
         // });
       }
@@ -158,7 +158,8 @@ function index({landingdata}) {
   return (
     <div className='ml-12'>
       <div className='text-cyan-700 font-bold underline text-3xl ml-10 my-6'>ADD NEW STORE</div>
-        <form onSubmit={handleAddFormSubmit}>
+      <div >
+        <form onSubmit={handleAddFormSubmit} >
             <input type="text" name="name" placeholder="Enter name" required='required' onChange={handleAddFormChange}/>
             <input type="text" name="address" placeholder="Enter address" onChange={handleAddFormChange}/>
             <input type="text" name="phone" placeholder="Enter Phone Number" onChange={handleAddFormChange}/>
@@ -167,9 +168,9 @@ function index({landingdata}) {
             <input type="text" name="storename" placeholder="Enter URL" onChange={handleAddFormChange}/>
             <input type="text" name="img1" placeholder="Enter Image1" onChange={handleAddFormChange}/>
             <input type="text" name="img2" placeholder="Enter Image2" onChange={handleAddFormChange}/>
-            
-            <button type='submit'> Add </button>
+            <button type='submit' className='bg-blue-400 text-white px-5'> Add </button>
         </form>
+        </div>
         <div className='text-cyan-700 font-bold underline text-3xl ml-10 my-6'>VIP STORE LIST</div>
         <form onSubmit={handleEditFormSubmit}>
         <table>
@@ -177,6 +178,7 @@ function index({landingdata}) {
             <tr>
               <th>Action</th>
               <th>Store Name</th>
+              <th>Category</th>
               {/* <th>Phone</th>
               <th>Store Address</th> */}
               <th>City</th>
@@ -184,7 +186,7 @@ function index({landingdata}) {
               <th>Zip Code</th> 
               <th>Store URL</th>
               <th>Image1</th>
-              <th>Category</th>
+            
              
             </tr>
           </thead>
@@ -207,6 +209,7 @@ function index({landingdata}) {
           </tbody>
         </table>
         </form>
+        <div className='mb-12cd '></div>
     </div>
   )
 }
@@ -217,16 +220,14 @@ export const getServerSideProps = async() => {
     );
 const db = client.db();
 const myCollection = db.collection('usavipstores');
-const myData = await myCollection.find({}, {storename: 1}).toArray(); 
+const myData = await myCollection.find({}, {state: 1}).toArray(); 
 client.close();
   //const res = await axios.get('https://ghanabraid.com/api/store');
   return {
     props: {
       landingdata: myData.map(Data => ({
         _id: Data._id.toString() ,
-        name: Data.name || null,
-        phone: Data.phone || null,
-        address: Data.address || null,
+        name: Data.name || null,   
         city: Data.city || null,
         zip: Data.zip || null,
         state: Data.state || null,

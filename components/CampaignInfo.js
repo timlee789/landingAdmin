@@ -70,7 +70,7 @@ function CampaignInfo({campaigninfo}) {
                 <input type="text" name="visit" placeholder="Enter Visit" onChange={handleAddFormChange}/>
                 <input type="text" name="participation" placeholder="Enter Participation" onChange={handleAddFormChange}/>    
                 <input type="text" name="content" placeholder="Enter Image" onChange={handleAddFormChange}/>    
-            <button type='submit'> Add </button>
+            <button type='submit' className='bg-blue-400 text-white px-5'> Add </button>
         </form>
       <form >
       <div className='my-8 text-2xl pl-16 text-blue-600 text-3xl'>CAMPAIGN HISTORY</div>

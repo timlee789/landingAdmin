@@ -50,14 +50,14 @@ export async function getStaticProps(context){
                                 state: store.state || null,
                                 img1: store.img1 || null,
                                 campaign: store.campaign || null,
-                                contents: store.contents || null,
+                               
                         }    
                         },
                 }
         }
 
 export default function Campaign({storeinfo}){
-     
+     console.log(storeinfo)
     return(
             <div>     
                 <CampaignInfo campaigninfo={storeinfo} />        

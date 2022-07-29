@@ -12,7 +12,7 @@ const EditableRow = ({
         <button type="button" onClick={handleCancelClick}  className=" mr-5 px-4 bg-blue-400 text-white text-center">
           Cancel
         </button>
-        <button type="submit"  className=" mr-10 px-4 bg-gray-500 text-white text-center">EDIT SAVE</button>
+        <button type="submit"  className=" mr-10 px-4 bg-gray-500 text-white text-center">SAVE</button>
       </td>
       <td>
         <input
@@ -44,6 +44,16 @@ const EditableRow = ({
           onChange={handleEditFormChange}
         ></input>
       </td> */}
+       <td>
+        <input
+          type="text"
+          required="required"
+          placeholder="Enter an Category..."
+          name="img2"
+          value={editFormData.img2}
+          onChange={handleEditFormChange}
+        ></input>
+      </td>
       <td>
         <input
           type="text"
@@ -94,16 +104,7 @@ const EditableRow = ({
           onChange={handleEditFormChange}
         ></input>
         </td>
-        <td>
-        <input
-          type="text"
-          required="required"
-          placeholder="Enter an Category..."
-          name="img2"
-          value={editFormData.img2}
-          onChange={handleEditFormChange}
-        ></input>
-      </td>
+       
     
     </tr>
   );
