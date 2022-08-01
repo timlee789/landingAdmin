@@ -145,14 +145,14 @@ function index({landingdata}) {
         setEditContactId(null);
       }
           const handleDeleteClick = async (contactId) => {
-            console.log(contactId);
+           
           const newStores = [...storeDatas];
           const index = storeDatas.findIndex((contact) => contact._id === contactId);
           newStores.splice(index, 1);
           setStoreData(newStores);
           const deleteData = await axios.delete('/api/delete',{params:{_id:contactId}})
           .then(function (response) {
-          console.log(response)
+          
           })
           }
   return (
