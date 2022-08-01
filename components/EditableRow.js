@@ -12,7 +12,7 @@ const EditableRow = ({
         <button type="button" onClick={handleCancelClick}  className=" mr-5 px-4 bg-blue-400 text-white text-center">
           Cancel
         </button>
-        <button type="submit"  className=" mr-10 px-4 bg-gray-500 text-white text-center">SAVE</button>
+        <button type="submit"  className=" mr-1 px-4 bg-gray-500 text-white text-center">SAVE</button>
       </td>
       <td>
         <input
@@ -24,26 +24,7 @@ const EditableRow = ({
           onChange={handleEditFormChange}
         ></input>
       </td>
-      {/* <td>
-        <input
-          type="text"
-          required="required"
-          placeholder="Enter a phone number..."
-          name="phone"
-          value={editFormData.phone}
-          onChange={handleEditFormChange}
-        ></input>
-      </td>
-      <td>
-        <input
-          type="text"
-          required="required"
-          placeholder="Enter an address..."
-          name="address"
-          value={editFormData.address}
-          onChange={handleEditFormChange}
-        ></input>
-      </td> */}
+     
        <td>
         <input
           type="text"
@@ -84,16 +65,7 @@ const EditableRow = ({
           onChange={handleEditFormChange}
         ></input>
         </td>
-        <td>
-        <input
-          type="text"
-          required="required"
-          placeholder="Enter an URL..."
-          name="storename"
-          value={editFormData.storename}
-          onChange={handleEditFormChange}
-        ></input>
-        </td>
+       
         <td>
         <input
           type="text"

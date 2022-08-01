@@ -179,15 +179,10 @@ function index({landingdata}) {
               <th>Action</th>
               <th>Store Name</th>
               <th>Category</th>
-              {/* <th>Phone</th>
-              <th>Store Address</th> */}
               <th>City</th>
               <th>State</th> 
-              <th>Zip Code</th> 
-              <th>Store URL</th>
-              <th>Image1</th>
-            
-             
+              <th>Zip Code</th>             
+              <th>Image1</th>         
             </tr>
           </thead>
           <tbody className='mt-10'>       
@@ -209,7 +204,7 @@ function index({landingdata}) {
           </tbody>
         </table>
         </form>
-        <div className='mb-12cd '></div>
+        <div className='mb-12 '></div>
     </div>
   )
 }
