@@ -58,7 +58,14 @@ function CampaignInfo({campaigninfo}) {
         // await axios.post('/api/dataInput', {
         // });
       }
-
+      async function submitDelete(id){
+        const res = await fetch('http://localhost:3000/api/delete',
+        {
+          method: 'DELETE',
+          body: id,
+        }
+        )
+      }
    
   return (
     <div className='m-8'>
@@ -95,6 +102,9 @@ function CampaignInfo({campaigninfo}) {
                     <td className='pr-12 pl-8'> {cam.visit}</td>
                     <td className='pr-12 pl-8'> {cam.participation}</td>
                     <td className='pr-12 pl-12'> {cam.content}</td>
+                    <td className='pr-12 pl-12'> 
+                    <button className='my-8 text-2xl pl-16 text-red-600 text-3xl' onClick={submitDelete(cam._id)}>Delete</button>
+                    </td>
 
                </tr>
       

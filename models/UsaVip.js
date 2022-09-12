@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 
-const usavipShema = new mongoose.Schema(
+const usavipstoreSchema = new mongoose.Schema(
     {
         _id: {type: String },
         name: {type: String, required: true},
@@ -14,8 +14,19 @@ const usavipShema = new mongoose.Schema(
         img1: {type: String, required: true},
         img2: {type: String, required: false},
         img3: {type: String, required: false},
+        campaign: 
+        [
+            { 
+                campaignname: {type: String, required: false},
+                period: {type: String, required: false},
+                reach: {type: String, required: false},
+                visit: {type: String, required: false},
+                participation: {type: String, required: false},
+                content: {type: String, required: false},
+            },
+        ],
     },
    
 );
-const Usavip = mongoose.models.Usavip || mongoose.model('Usavip', usavipShema);
-export default Usavip;
+const Usavipstore = mongoose.models.Usavipstore || mongoose.model('Usavipstore', usavipstoreSchema);
+export default Usavipstore;

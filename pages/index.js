@@ -142,21 +142,24 @@ function index({landingdata}) {
         setEditFormData(formValues)
 }
       const handleCancelClick = () => {
-        setEditContactId(null);
+                setEditContactId(null);
       }
-          const handleDeleteClick = async (contactId) => {
-           
-          const newStores = [...storeDatas];
-          const index = storeDatas.findIndex((contact) => contact._id === contactId);
-          newStores.splice(index, 1);
-          setStoreData(newStores);
-          const deleteData = await axios.delete('/api/delete',{params:{_id:contactId}})
-          .then(function (response) {
-          
-          })
-          }
+      const handleDeleteClick = async (contactId) => {
+        
+                const newStores = [...storeDatas];
+                const index = storeDatas.findIndex((contact) => contact._id === contactId);
+                newStores.splice(index, 1);
+                setStoreData(newStores);
+                const deleteData = await axios.delete('/api/delete',{params:{_id:contactId}})
+                .then(function (response) {
+      
+      })
+      }
+
+      
   return (
     <div className='ml-12'>
+      
       <div className='text-cyan-700 font-bold underline text-3xl ml-10 my-6'>ADD NEW STORE</div>
       <div >
         <form onSubmit={handleAddFormSubmit} >

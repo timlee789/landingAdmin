@@ -7,8 +7,7 @@ const EditableRow = ({
 }) => {
   return (
     <tr>
-        <td>
-       
+        <td>   
         <button type="button" onClick={handleCancelClick}  className=" mr-5 px-4 bg-blue-400 text-white text-center">
           Cancel
         </button>
